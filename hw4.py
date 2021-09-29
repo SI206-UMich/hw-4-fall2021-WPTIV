@@ -215,10 +215,21 @@ class TestAllMethods(unittest.TestCase):
 ### Write main function
 def main():
     #Create different objects 
+    inventory1 = {"Corn" : 15, "Huitlacoche" : 30, "Beets" : 40}
+    inventory2 = {"Porkchops" : 10, "Beefsteak" : 10, "Chicken" : 15, "Eggs" : 50}
+
 
     #Try all cases in the validate_order function
     #Below you need to have *each customer instance* try the four cases
-    #case 1: the cashier does not have the stall 
+    Kevin = Customer('Kevin', 200)
+    Gerald = Customer('Gerald')
+    Corbin = Customer('Corbin', 75)
+
+    stall1 = Stall('Corn n Stuff', inventory1)
+    stall2 = Stall('Meat n Things', inventory2, 10)
+
+    #case 1: the cashier does not have the stall
+
     
     #case 2: the casher has the stall, but not enough ordered food or the ordered food item
     
