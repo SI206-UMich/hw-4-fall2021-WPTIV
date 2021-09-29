@@ -28,7 +28,9 @@ class Customer:
     # Submit_order takes a cashier, a stall and an amount as parameters, 
     # it deducts the amount from the customer’s wallet and calls the receive_payment method on the cashier object
     def submit_order(self, cashier, stall, amount): 
-        pass
+        self.wallet -= amount
+        cashier = Cashier()
+        cashier.receive_payment(stall, amount)
 
     # The __str__ method prints the customer's information.    
     def __str__(self):
@@ -71,8 +73,42 @@ class Cashier:
 
 ## Complete the Stall class here following the instructions in HW_4_instructions_rubric
 class Stall:
+    def __init__(self, name, inventory, cost = 7, earnings = 0):
+        self.name = name
+        self.inventory = inventory
+        self.cost = cost
+        self.earnings = earnings
+
+
+    def has_item(self, food, quantity):
+        if food in self.inventory and self.inventory[food] >= quantity:
+            return True
+        else:
+            return False
     
-    pass
+    
+    def process_order(self, food, quantity):
+        if self.has_item(food, quantity) == True:
+            self.inventory[food] = self.inventory[food] - quantity
+            self.earnings += (self.cost * quantity)
+        else:
+            return "Not enough stock"
+
+    def stock_up(self, food, quantity):
+        if food in self.inventory:
+            x = self.inventory[food]
+            self.inventory[food] = [quantity + x]
+        else:
+            self.inventory[food] = [quantity]
+    
+    def compute_cost(self, quantity):
+        order_cost = quantity * self.cost
+        return order_cost
+    
+    def __str__(self):
+        return f"Hello, we are {self.name}. This is the current menu {list(self.inventory.keys())}. We charge ${self.cost} per item. We have ${self.earnings} in total"
+
+
 
 
 class TestAllMethods(unittest.TestCase):
